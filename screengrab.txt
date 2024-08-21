@@ -1,0 +1,90 @@
+@name Screengrab
+@persist P:entity
+
+interval(10)
+#Here entity number to spectate
+P=entity(8)
+
+if (first()){
+    holoCreate(1)
+    holoVisible(1,players(),0)
+    holoVisible(1,owner(),1)
+    cameraCreate(1)
+    cameraToggle(1,1)
+    print("Armor:"+P:armor())
+    print("HP:"+P:health())
+    print("Weapon: ",P:weapon():type())
+    print("PLAYER: "+P:name())
+    print("STEAMID: "+P:steamID())
+    holoPos(1,cameraEntity(1):toWorld(vec(0,0,-1)))
+    holoParent(1,cameraEntity(1))
+}
+if (changed(P:weapon())){
+    holoAnim(1,1)
+} 
+if (P:keyAttack1()){
+    holoPos(1,cameraEntity(1):toWorld(vec(-10,0,-1)))
+} else {
+    holoPos(1,cameraEntity(1):toWorld(vec(0,0,-1)))
+    
+}
+cameraPos(1,P:toWorld(vec(30,0,70)))
+cameraAng(1,P:eyeAngles())
+print(_HUD_PRINTCENTER,"HP: "+P:health()+", Armor: "+P:armor()+", Weapon: "+P:weapon():type())
+if (P:weapon():type() == "m9k_m3" | P:weapon():type() ==  "m9k_browningauto5" | P:weapon():type() ==  "m9k_dbarrel" | P:weapon():type() ==  "m9k_ithacam37" | P:weapon():type() ==  "m9k_mossberg590" | P:weapon():type() ==  "m9k_jackhammer" | P:weapon():type() == "m9k_remington870" | P:weapon():type() == "m9k_spas12" | P:weapon():type() == "m9k_striker12" | P:weapon():type() == "m9k_usas" | P:weapon():type() == "m9k_1897winchester" | P:weapon():type() == "m9k_1887winchester"){
+    if (changed(P:weapon())){
+        print("WeaponType: m9k_shotgun")
+    } 
+    holoModel(1,"models/weapons/v_shotgun.mdl")
+    Shotgun=1
+} else { Shotgun=0 }
+if (P:weapon():type() == "m9k_colt1911" | P:weapon():type() == "m9k_coltpython" | P:weapon():type() == "m9k_deagle" | P:weapon():type() == "m9k_glock" | P:weapon():type() == "m9k_usp" | P:weapon():type() == "m9k_hk45" | P:weapon():type() == "m9k_m29satan" | P:weapon():type() == "m9k_m92beretta" | P:weapon():type() == "m9k_luger" | P:weapon():type() == "m9k_ragingbull" | P:weapon():type() == "m9k_scoped_taurus" | P:weapon():type() == "m9k_remington1858" | P:weapon():type() == "m9k_model3russian" | P:weapon():type() == "m9k_model500" | P:weapon():type() == "m9k_model627" ){
+    if (changed(P:weapon())){
+        print("WeaponType: m9k_pistol")
+    }     
+    holoModel(1,"models/weapons/v_357.mdl")
+    Pistol=1
+} else { Pistol=0 }
+if (P:weapon():type() == "weapon_crowbar"){
+    holoModel(1,"models/weapons/v_crowbar.mdl")
+}
+if (P:weapon():type() == "weapon_physgun"){
+    holoModel(1,"models/weapons/v_superphyscannon.mdl")
+}
+if (P:weapon():type() == "weapon_physcannon"){
+    holoModel(1,"models/weapons/v_physcannon.mdl")
+}
+if (P:weapon():type() == "weapon_pistol"){
+    holoModel(1,"models/weapons/v_pistol.mdl")
+}
+if (P:weapon():type() == "weapon_shotgun"){
+    holoModel(1,"models/weapons/v_shotgun.mdl")
+}
+if (P:weapon():type() == "weapon_crossbow"){
+    holoModel(1,"models/weapons/v_crossbow.mdl")
+}
+if (P:weapon():type() == "weapon_frag"){
+    holoModel(1,"models/weapons/v_grenade.mdl")
+}
+if (P:weapon():type() == "weapon_smg1"){
+    holoModel(1,"models/weapons/v_smg1.mdl")
+}
+if (P:weapon():type() == "weapon_irifle"){
+    holoModel(1,"models/weapons/v_irifle.mdl")
+}
+if (P:weapon():type() == "weapon_357"){
+    holoModel(1,"models/weapons/v_357.mdl")
+}
+if (P:weapon():type() == "gmod_tool"){
+    holoModel(1,"models/weapons/v_toolgun.mdl")
+}
+if (Shotgun == 0 | Pistol == 0){
+    Wep=P:weapon():type():explode("_")
+    WS1=Wep[1,string]
+    if (WS1=="m9k"){
+        holoModel(1,"models/weapons/v_smg1.mdl")
+    }
+}
+if (P:keyDuck()){
+    cameraPos(1,P:toWorld(vec(30,0,30)))
+}
