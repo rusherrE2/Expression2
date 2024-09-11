@@ -1,0 +1,5 @@
+@name Testing
+@persist
+
+print("Hello World!")
+print("This chip was executed from github!")
