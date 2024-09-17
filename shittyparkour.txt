@@ -1,0 +1,37 @@
+@name shittyparkour
+@inputs 
+@outputs 
+@persist Ranger:ranger H:entity Angle:angle
+@trigger 
+@strict
+
+interval(10)
+runOnKeys(players(),1)
+foreach(K,V:entity = players()){
+    Ranger=rangerOffset(1000,V:toWorld(vec(0,0,100)),V:forward())
+    if (Ranger:distance() < 20){
+        if (keyClk()){
+        }
+        if (V:keyJump()){
+            if (changed(V:keyJump())){
+                V:setPos(V:pos()-vec(0,0,10))
+                V:setPos(V:pos()-vec(0,0,10))
+                V:setPos(V:pos()-vec(0,0,10))
+                V:setPos(V:pos()-vec(0,0,10))
+                timer("w",500)
+            }
+            Rand=random(-10,10)
+            V:setEyeAngles(V:toWorld(ang(-50,0,Rand)))
+            Rand1=random(5,20)
+            
+            V:setPos(V:pos()+vec(0,0,Rand1))
+            V:setVel(V:up()*50)
+            
+        } else {
+            V:setAng(V:toWorld(ang(-40,0,0)))
+            V:setAng(V:toWorld(ang(-30,0,0)))
+            V:setAng(V:toWorld(ang(-20,0,0)))
+            V:setAng(V:toWorld(ang(-0,0,0)))
+        }
+    }
+}
